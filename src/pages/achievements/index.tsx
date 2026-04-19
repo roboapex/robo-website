@@ -1,7 +1,5 @@
-import { Endpoints } from "@octokit/types";
 import Notice from "../../components/notice";
 import React, { useEffect, useState } from "react";
-import useSWR from "swr";
 import AchievementsRow from "../../components/achievements/row";
 import AchievementsFilter from "../../components/achievements/filter";
 import ThemeLayout from "../../components/theme/layout";
@@ -9,6 +7,7 @@ import {
   Achievements,
   AchievementsFilterProperties,
 } from "../../types/achievements";
+import achievementsData from "../../data/achievements.json";
 import Link from "@docusaurus/Link";
 
 import style from "./style.module.scss";
@@ -61,11 +60,5 @@ export default function AchievementsPage() {
 }
 
 const useAchievements = () => {
-  const { data } = useSWR<
-    Endpoints["GET /repos/{owner}/{repo}/contents/{path}"]["response"]["data"]
-  >(
-    "https://api.github.com/repos/roboapex/roboapex.github.io/contents/data/achievements/achievements.json"
-  );
-  if (!!data) return JSON.parse(atob(data?.["content"])) as Achievements[];
-  return [];
+  return achievementsData as Achievements[];
 };

@@ -8,7 +8,7 @@ export interface CompetitionRegion {
 }
 
 export type CompetitionRegionCode = string
-export type CompetitionEventCode = "nrc" | "robocup" | "fll" | "ide" | "apyrc" | "vex" | "bullseye" | "roborave" | "makex"
+export type CompetitionEventCode = "nrc" | "robocup" | "fll" | "ide" | "apyrc" | "vex" | "bullseye" | "roborave" | "makex" | "wro" | "ftc" | "blanks"
 export const CompetitionCodes: { [k in CompetitionEventCode]: CompetitionEvent } = {
   nrc: {
     regions: {
@@ -99,6 +99,29 @@ export const CompetitionCodes: { [k in CompetitionEventCode]: CompetitionEvent }
       world: {
         name: "",
         website: "https://www.makex.cc/en"
+      }
+    }
+  },
+  wro: {
+    regions: {
+      sg: {
+        name: "World Robot Olympiad",
+        website: "https://wro-association.org/"
+      }
+    }
+  },
+  ftc: {
+    regions: {
+      sg: {
+        name: "FIRST Tech Challenge Singapore",
+        website: "https://www.firstinspires.org/ftc"
+      }
+    }
+  },
+  blanks: {
+    regions: {
+      sg: {
+        name: "Blank's Beginnings"
       }
     }
   }

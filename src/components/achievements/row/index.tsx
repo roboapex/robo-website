@@ -21,6 +21,10 @@ export default function AchievementsRow({
   };
 
   const competition = CompetitionCodes[achievementCompetition.code];
+  const regionDetails = competition?.regions[achievementCompetition.region] ?? {
+    name: achievementCompetition.region || achievementCompetition.code,
+    website: "",
+  };
 
   console.log(achievementCompetition);
 
@@ -42,20 +46,16 @@ export default function AchievementsRow({
         <img
           src={`https://raw.githubusercontent.com/roboapex/roboapex.github.io/main/data/competitions/${achievementCompetition.code}_${achievementCompetition.region}.png`}
           onError={onImageUnavailable}
-          alt={`${
-            competition.regions[achievementCompetition.region].name
-          }'s Logo'`}
-          title={competition.regions[achievementCompetition.region].name}
+          alt={`${regionDetails.name}'s Logo`}
+          title={regionDetails.name}
           className={style.logo}
         />
         <h2>
-          {competition.regions[achievementCompetition.region].name} {year}
+          {regionDetails.name} {year}
         </h2>
         <p>{achievementCompetition.desc}</p>
         <Link
-          href={
-            competition.regions[achievementCompetition.region].website ?? ""
-          }
+          href={regionDetails.website ?? ""}
         >
           Visit Website
         </Link>
