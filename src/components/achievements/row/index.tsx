@@ -21,7 +21,7 @@ export default function AchievementsRow({
   };
 
   const competition = CompetitionCodes[achievementCompetition.code];
-  const regionDetails = competition?.regions?.[achievementCompetition.region] ?? {
+  const regionDetails = competition?.region?.[achievementCompetition.region] ?? {
     name: achievementCompetition.region || achievementCompetition.code,
     website: "",
   };
