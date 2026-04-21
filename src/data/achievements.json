@@ -4,6 +4,29 @@
       {
         "awards": [
           {
+            "category": "RCJ U19",
+            "recipients": [
+              "Lai Hong Yu",
+              "Chew Jin Rui Rayden",
+              "Nathanael Chin Chi Yi",
+              "Tejeshwar Nandagopal"
+            ],
+            "team": "SSTeio",
+            "title": "4th Place"
+          }
+        ],
+        "code": "robocup",
+        "desc": "",
+        "region": "sg"
+      }
+    ],
+    "year": 2026
+  },
+  {
+    "competitions": [
+      {
+        "awards": [
+          {
             "category": "Overall",
             "recipients": [
               "Damien Chong Yu Zhe",
