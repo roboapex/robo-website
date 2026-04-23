@@ -4,57 +4,58 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 
 import style from "./style.module.scss";
 
-const NUMBER_OF_IMAGES = 4;
+const NUMBER_OF_IMAGES = 6;
 
 export default function HomeHeader() {
   const [imageIndex, setImageIndex] = useState(0);
+  const bgUrl = useBaseUrl(`/img/home/header/${imageIndex}.jpg`);
 
   useEffect(() => {
     const int = setInterval(() => {
       setImageIndex((i) => (i + 1 <= NUMBER_OF_IMAGES - 1 ? i + 1 : 0));
-      console.log("change");
-    }, 10000);
+    }, 7000);
     return () => clearInterval(int);
   }, []);
 
   return (
-    <section
-      className={style.header}
-      style={{
-        backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.95) ), url(${useBaseUrl(
-          `/img/home/header/${imageIndex}.jpg`
-        )})`,
-      }}
-    >
-      <h1 className={style.title}>
-        <span>Robotics</span> <span>@APEX</span>
-      </h1>
-      <p className={style.tagline}>
-        Founded in 2010, Robotics @APEX is a niche CCA in the School of Science
-        and Technology, Singapore
-      </p>
-      <div className={style.buttons}>
-        <ThemeButton path="https://www.instagram.com/roboapex/">Follow Us!</ThemeButton>
-        {/* <ThemeButton path="/join/faq" color="primary" type="outline" style={{ color: "white", borderColor: "white" }}>
-          FAQs
-        </ThemeButton> */}
-        {/* <ThemeButton path="#intro" color="secondary" type="outline">
-          Learn More
-        </ThemeButton> */}
-        {/* <ThemeButton path="/docs">Docs</ThemeButton>
-          <ThemeButton path="/blog">Blog</ThemeButton>
-          <ThemeButton path="/projects">Projects</ThemeButton> */}
+    <section className={style.header} style={{ backgroundImage: `url(${bgUrl})` }}>
+      <div className={style.overlay} />
+
+      <div className={style.content}>
+        <div className={style.accentLine} />
+        <h1 className={style.title}>
+          <span className={style.robotics}>Robotics</span>
+          <span className={style.apex}>@APEX</span>
+        </h1>
+        <p className={style.tagline}>
+          Founded in 2010 — Singapore's leading student robotics CCA at SST.
+        </p>
+        <div className={style.buttons}>
+          <ThemeButton path="https://www.instagram.com/roboapex/">Follow Us</ThemeButton>
+          <ThemeButton
+            path="/achievements"
+            color="secondary"
+            type="outline"
+            style={{ color: "white", borderColor: "rgba(255,255,255,0.5)" }}
+          >
+            Our Achievements
+          </ThemeButton>
+        </div>
       </div>
-      <div className={style.indicator}>
+
+      <div className={style.indicators}>
         {[...Array(NUMBER_OF_IMAGES)].map((_, i) => (
-          <span
-          key={i}
-            style={{
-              backgroundColor: imageIndex === i ? "#fff" : "#ffffff44",
-            }}
+          <button
+            key={i}
+            className={`${style.dot} ${imageIndex === i ? style.dotActive : ""}`}
             onClick={() => setImageIndex(i)}
-          ></span>
+            aria-label={`Slide ${i + 1}`}
+          />
         ))}
+      </div>
+
+      <div className={style.scrollHint}>
+        <span />
       </div>
     </section>
   );

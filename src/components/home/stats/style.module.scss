@@ -1,67 +1,108 @@
 @use "../../../styles/theme";
 
 .main {
+  position: relative;
   background-image: url(../../../../static/img/home/stats/trophies1.jpg);
   background-attachment: fixed;
   background-position: center;
-  display: grid;
-  place-items: center;
-}
-
-.circles {
+  background-size: cover;
   display: flex;
   flex-direction: column;
-  width: 300px;
-  margin-bottom: 130px; // compensate for -50px * 3 but a little less
+  align-items: center;
+  gap: 60px;
+}
 
-  div {
-    color: rgba(theme.$color-white, 1);
-    backdrop-filter: blur(2px);
-    border-radius: 1000px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 200px;
-    height: 200px;
-    margin-bottom: -50px;
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.72);
+  z-index: 0;
+}
 
-    h1 {
-      font-family: "Ethnocentric";
-      font-size: 40px;
-    }
+.grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  max-width: 900px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 24px;
+  text-align: center;
+  color: white;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  border-top-width: 3px;
+  border-top-style: solid;
+  backdrop-filter: blur(6px);
+  background-color: rgba(0, 0, 0, 0.25);
+  transition: background-color 200ms ease;
+
+  &:last-child {
+    border-right: none;
+  }
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.04);
   }
 }
 
 .yellow {
-  background-color: rgba(theme.$color-yellow, 0.667);
+  border-top-color: theme.$color-yellow;
 }
+
 .red {
-  background-color: rgba(theme.$color-red, 0.667);
-  align-self: flex-end;
+  border-top-color: theme.$color-red;
 }
+
 .blue {
-  background-color: rgba(theme.$color-blue, 0.667);
+  border-top-color: theme.$color-blue;
 }
 
-@media (min-width: 996px) {
-  .circles {
-    width: 420px;
-    margin-bottom: 180px; // compensate for -100px * 3 but a little less
+.number {
+  font-family: "Ethnocentric";
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 10px;
+  display: block;
 
-    div {
-      width: 230px;
-      height: 230px;
-      margin-bottom: -100px;
+  .yellow & { color: theme.$color-yellow; }
+  .red & { color: theme.$color-red; }
+  .blue & { color: theme.$color-blue; }
+}
 
-      h1 {
-        font-size: 50px;
-      }
-    }
+.label {
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  display: block;
+}
 
-    .red {
-      width: 300px;
-      height: 300px;
+/* z-index for the ThemeButton rendered after .grid */
+.main > :last-child {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stat {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    &:last-child {
+      border-bottom: none;
     }
   }
 }

@@ -33,7 +33,7 @@ module.exports = {
         //   to: `/join`,
         //   items: [
         //     { to: '/join', label: "Sign Up for Trials" },
-        //     { to: '/join/faq', label: "FAQ" }
+        //     { to: '/join/faq'c, label: "FAQ" }
         //   ]
         // },
         { to: '/achievements', label: 'Achievements', position: 'left' },

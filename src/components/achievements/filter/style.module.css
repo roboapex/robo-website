@@ -1,9 +1,65 @@
-.flex {
+.bar {
+  position: sticky;
+  top: 70px;
+  z-index: 10;
   display: flex;
-  gap: 10px;
+  gap: 12px;
   align-items: center;
+  padding: 12px 16px;
+  background-color: var(--ifm-navbar-background-color, #fff);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 6px;
+  flex-wrap: wrap;
+  margin-top: 28px;
 }
 
-.icon {
-  color: var(--ifm-link-color);
+.label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.45;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dropdowns {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.active {
+  background-color: var(--ifm-color-primary) !important;
+  border-color: var(--ifm-color-primary) !important;
+  color: #fff !important;
+}
+
+.inactive {
+  background-color: transparent !important;
+  border: 1px solid var(--ifm-color-emphasis-300) !important;
+  color: var(--ifm-font-color-base) !important;
+}
+
+.inactive:hover {
+  background-color: var(--ifm-color-emphasis-100) !important;
+  border-color: var(--ifm-color-emphasis-400) !important;
+}
+
+.chevron {
+  font-size: 0.6rem;
+  margin-left: 6px;
+  opacity: 0.6;
+}
+
+.clear {
+  margin-left: auto;
+  background-color: transparent !important;
+  border: 1px solid var(--ifm-color-emphasis-300) !important;
+  color: var(--ifm-font-color-base) !important;
+  opacity: 0.6;
+}
+
+.clear:hover {
+  opacity: 1 !important;
 }

@@ -1,10 +1,69 @@
+@use "../../styles/theme";
+
+.hero {
+  padding: 48px 0 36px;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  margin-bottom: 32px;
+}
+
+.heroAccent {
+  width: 40px;
+  height: 4px;
+  background-color: theme.$color-red;
+  margin-bottom: 18px;
+}
+
+.heroTitle {
+  font-family: "Ethnocentric";
+  font-style: italic;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  line-height: 1;
+  margin: 0 0 10px;
+  letter-spacing: -0.02em;
+}
+
+.heroSub {
+  margin: 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.45;
+}
+
+.resultCount {
+  margin-top: 20px;
+  margin-bottom: -20px;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.4;
+}
+
 .awards {
   display: flex;
   flex-direction: column;
-  gap: 50px;
-  margin-top: 50px;
+  gap: 64px;
+  margin-top: 48px;
 }
 
 .yearHeader {
-  margin-bottom: -30px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: -32px;
+}
+
+.yearNumber {
+  font-family: "Ethnocentric";
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-style: italic;
+  color: var(--ifm-color-emphasis-500);
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.yearRule {
+  flex: 1;
+  height: 1px;
+  background-color: var(--ifm-color-emphasis-200);
 }

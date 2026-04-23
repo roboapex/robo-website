@@ -36,71 +36,74 @@ export default function AchievementsFilter({
         (!!searchParams.toString() ? "?" : "") +
         searchParams.toString()
     );
-    console.log(filter);
-
     onUpdate(filter);
   }, [filter]);
 
+  const hasFilter = !!filter.year || !!filter.comp;
+
   return (
-    <div className={style.flex}>
-      <i className={clsx("fas fa-filter", style.icon)} />
-      <div className="dropdown dropdown--hoverable">
-        <button className={`button button--${!!filter.year ? "primary" : "link"}`}>
-          {filter.year || "Year"}
-        </button>
-        <ul className="dropdown__menu">
-          <li>
-            <a
-              className="dropdown__link"
-              href="javascript:void(0)"
-              onClick={() => setFilter((f) => ({ ...f, year: null }))}
-            >
-              None
-            </a>
-          </li>
-          {achievements?.map((e, i) => (
-            <li key={i}>
-              <a
-                className="dropdown__link"
-                href="javascript:void(0)"
-                onClick={() =>
-                  setFilter((f) => ({ ...f, year: e.year.toString() }))
-                }
-              >
-                {e.year}
+    <div className={style.bar}>
+      <span className={style.label}>
+        <i className="fas fa-filter" />
+        Filter
+      </span>
+
+      <div className={style.dropdowns}>
+        <div className="dropdown dropdown--hoverable">
+          <button className={clsx("button", "button--sm", filter.year ? style.active : style.inactive)}>
+            {filter.year || "Year"}
+            <i className={clsx("fas fa-chevron-down", style.chevron)} />
+          </button>
+          <ul className="dropdown__menu">
+            <li>
+              <a className="dropdown__link" href="javascript:void(0)"
+                onClick={() => setFilter((f) => ({ ...f, year: null }))}>
+                All years
               </a>
             </li>
-          ))}
-        </ul>
+            {achievements?.map((e, i) => (
+              <li key={i}>
+                <a className="dropdown__link" href="javascript:void(0)"
+                  onClick={() => setFilter((f) => ({ ...f, year: e.year.toString() }))}>
+                  {e.year}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="dropdown dropdown--hoverable">
+          <button className={clsx("button", "button--sm", filter.comp ? style.active : style.inactive)}>
+            {filter.comp ? filter.comp.toUpperCase() : "Competition"}
+            <i className={clsx("fas fa-chevron-down", style.chevron)} />
+          </button>
+          <ul className="dropdown__menu">
+            <li>
+              <a className="dropdown__link" href="javascript:void(0)"
+                onClick={() => setFilter((f) => ({ ...f, comp: null }))}>
+                All competitions
+              </a>
+            </li>
+            {Object.entries(CompetitionCodes).map(([code], i) => (
+              <li key={i}>
+                <a className="dropdown__link" href="javascript:void(0)"
+                  onClick={() => setFilter((f) => ({ ...f, comp: code }))}>
+                  {code.toUpperCase()}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
-      <div className="dropdown dropdown--hoverable">
-        <button className={`button button--${!!filter.comp ? "primary" : "link"}`}>
-          {filter.comp || "Competition"}
+      {hasFilter && (
+        <button
+          className={clsx("button", "button--sm", style.clear)}
+          onClick={() => setFilter({ year: null, comp: null })}
+        >
+          Clear
         </button>
-        <ul className="dropdown__menu">
-          <li>
-            <a
-              className="dropdown__link"
-              href="javascript:void(0)"
-              onClick={() => setFilter((f) => ({ ...f, comp: null }))}
-            >
-              None
-            </a>
-          </li>
-          {Object.entries(CompetitionCodes).map((e, i) => (
-            <li key={i}>
-              <a
-                className="dropdown__link"
-                href="javascript:void(0)"
-                onClick={() => setFilter((f) => ({ ...f, comp: e[0] }))}
-              >
-                {e[0]}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
+      )}
     </div>
   );
 }

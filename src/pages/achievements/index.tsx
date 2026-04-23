@@ -27,24 +27,47 @@ export default function AchievementsPage() {
         ...a,
         competitions: a.competitions.filter(
           (v) =>
-          (!filter?.year || a?.year.toString() === filter.year) &&
-          (!filter?.comp || v?.code === filter.comp)
+            (!filter?.year || a?.year.toString() === filter.year) &&
+            (!filter?.comp || v?.code === filter.comp)
         ),
       })).filter((v) => v.competitions.length > 0)
     );
   }, [achievements.length, filter]);
 
+  const totalAwards = filtered.reduce(
+    (sum, a) => sum + a.competitions.reduce((s, c) => s + c.awards.length, 0),
+    0
+  );
+
   return (
     <ThemeLayout title="Achievements">
-      <Notice>Currently, only achievements from 2016 and onwards are displayed. Earlier achievements may be found <Link href="https://www.sst.edu.sg/cca/robotics-apex/">here</Link>.</Notice>
+      <div className={style.hero}>
+        <div className={style.heroAccent} />
+        <h1 className={style.heroTitle}>Achievements</h1>
+        <p className={style.heroSub}>Over a decade of competition results</p>
+      </div>
+
+      <Notice>
+        Only achievements from 2016 onwards are displayed. Earlier results may be found{" "}
+        <Link href="https://www.sst.edu.sg/cca/robotics-apex/">here</Link>.
+      </Notice>
+
       <AchievementsFilter
         achievements={achievements}
         onUpdate={(filter) => setFilter(filter)}
       />
+
+      {filtered.length > 0 && (
+        <p className={style.resultCount}>{totalAwards} award{totalAwards !== 1 ? "s" : ""}</p>
+      )}
+
       <div className={style.awards}>
         {filtered?.map((a, i) => (
           <React.Fragment key={i}>
-            <h1 className={style.yearHeader}>{a.year}</h1>
+            <div className={style.yearHeader}>
+              <span className={style.yearNumber}>{a.year}</span>
+              <div className={style.yearRule} />
+            </div>
             {a.competitions.map((e, i) => (
               <AchievementsRow
                 achievementCompetition={e}

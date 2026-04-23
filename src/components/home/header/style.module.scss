@@ -2,62 +2,144 @@
 
 .header {
   position: relative;
-  overflow: hidden;
-  height: 500px;
-
+  min-height: 100vh;
   background-position: center;
   background-size: cover;
   color: white;
-  padding-top: 50px !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 0;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  padding: 0 5vw;
+  animation: fadeInUp 0.8s ease both;
+}
+
+.accentLine {
+  width: 56px;
+  height: 4px;
+  background-color: theme.$color-red;
+  margin-bottom: 28px;
 }
 
 .title {
   font-family: "Ethnocentric";
   font-style: italic;
   font-weight: 700;
-  font-size: 2.5rem;
+  font-size: clamp(3.5rem, 9vw, 7.5rem);
+  line-height: 0.92;
+  margin: 0 0 0.5em;
+  letter-spacing: -0.02em;
 }
 
-.title span {
-  display: inline-block;
+.robotics {
+  display: block;
+}
+
+.apex {
+  display: block;
+  color: theme.$color-red;
 }
 
 .tagline {
-  max-width: 50ch;
-  font-size: 1.3rem;
-}
-
-.indicator {
-  width: 180px;
-  height: 7px;
-  display: flex;
-  gap: 10px;
-  margin-top: 40px;
-}
-
-.indicator span {
-  border-radius: 10px;
-  height: 100%;
-  width: 100%;
-  background-color: #ffffff44;
+  font-size: clamp(0.95rem, 1.6vw, 1.2rem);
+  max-width: 52ch;
+  opacity: 0.72;
+  margin-bottom: 2.5rem;
+  letter-spacing: 0.04em;
+  font-weight: 400;
 }
 
 .buttons {
   display: flex;
-  gap: 20px;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
-.buttons a:hover {
-  background-color: theme.$color-red !important;
-  border-color: theme.$color-red !important;
+.indicators {
+  position: absolute;
+  bottom: 40px;
+  left: 5vw;
+  display: flex;
+  gap: 8px;
+  z-index: 1;
+  align-items: center;
+}
+
+.dot {
+  width: 32px;
+  height: 3px;
+  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 0.28);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: width 280ms ease, background-color 280ms ease;
+}
+
+.dotActive {
+  width: 60px;
+  background-color: theme.$color-red;
+}
+
+.scrollHint {
+  position: absolute;
+  bottom: 40px;
+  right: 5vw;
+  z-index: 1;
+
+  span {
+    display: block;
+    width: 1px;
+    height: 64px;
+    background-color: rgba(255, 255, 255, 0.35);
+    animation: scrollPulse 2.4s ease infinite;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scrollPulse {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  50% {
+    opacity: 0.8;
+    transform: scaleY(1.15);
+    transform-origin: top;
+  }
 }
 
 @media (min-width: 996px) {
-  .title {
-    font-size: 3rem; // from Infima
+  .content {
+    padding: 0 100px;
   }
-
-  .tagline {
-    font-size: 1.5rem;
+  .indicators {
+    left: 100px;
+  }
+  .scrollHint {
+    right: 100px;
   }
 }

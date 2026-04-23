@@ -1,25 +1,23 @@
 .box {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 30px 0;
-  font-size: 20px;
-  
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 20px;
+  border-left: 3px solid var(--ifm-color-primary);
+  background-color: var(--ifm-color-emphasis-100);
+  font-size: 0.875rem;
+  border-radius: 0 4px 4px 0;
 
-  // Wrap long URLs from: https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/
-  // These are technically the same, but use both
-  overflow-wrap: break-word;
-  word-wrap: break-word;
+  p {
+    margin: 0;
+    line-height: 1.6;
+  }
 
-  -ms-word-break: break-all;
-  // This is the dangerous one in WebKit, as it breaks things wherever
-  word-break: break-all;
-  // Instead use this non-standard one:
-  word-break: break-word;
-
-  // Adds a hyphen where the word breaks, if supported (No Blink)
-  -ms-hyphens: auto;
-  -moz-hyphens: auto;
-  -webkit-hyphens: auto;
-  hyphens: auto;
+  &::before {
+    content: "ℹ";
+    font-size: 1rem;
+    color: var(--ifm-color-primary);
+    flex-shrink: 0;
+    line-height: 1.6;
+  }
 }

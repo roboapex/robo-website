@@ -1,27 +1,30 @@
 @use "../../../styles/theme";
 
 .main {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url(../../../../static/img/home/intro/brick_seamless.jpg);
+  position: relative;
+  background-image: url(../../../../static/img/home/intro/brick_seamless.jpg);
   background-size: clamp(400px, 50%, 500px);
   color: #fff;
-  margin-top: -130px !important;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.78);
+    z-index: 0;
+  }
 }
 
 .main > div {
+  position: relative;
+  z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
-  div {
-    position: relative;
-    z-index: 1;
-  }
 }
 
 div.culture {
-  // .culture not specific enough
   gap: 0 5%;
   max-width: 100vw;
   align-items: flex-start;
@@ -36,9 +39,11 @@ div.culture > div img {
 }
 
 .head {
-  margin-bottom: 0;
-  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 4px;
+  color: rgba(255, 255, 255, 0.45);
   text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.78rem;
 }
 
 .content {
@@ -55,75 +60,37 @@ div.culture > div img {
   max-width: 400px;
 }
 
-@mixin radial-shadow($color) {
-  content: "";
-  background-image: radial-gradient(
-    circle,
-    rgba($color, 0.2),
-    #00000000 70%,
-    #00000000
-  );
-  position: absolute;
-  width: 400px;
-  height: 400px;
-  z-index: -1;
-
-  @media (min-width: 700px) {
-    width: 500px;
-    height: 500px;
-  }
-  @media (min-width: 996px) {
-    width: 700px;
-    height: 700px;
-  }
+/* Solid border accents per section — no gradients */
+.mission div {
+  border-left: 4px solid theme.$color-red;
+  padding-left: 24px;
 }
 
-.mission {
-  text-align: right;
-
-  .content > span {
-    background-color: rgba(theme.$color-red, 0.4);
-  }
-  div::before {
-    @include radial-shadow(theme.$color-red);
-    top: -150px;
-    right: -150px;
-  }
-  // div::after {
-  //   @include radial-shadow(theme.$color-red);
-  //   top: -300px;
-  //   left: -150px;
-  // }
+.mission .content > span {
+  background-color: rgba(theme.$color-red, 0.25);
 }
 
-.values {
-  text-align: center;
-
-  .content > span {
-    background-color: rgba(theme.$color-yellow, 0.4);
-  }
-  div::before {
-    @include radial-shadow(theme.$color-yellow);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+.values div {
+  border-left: 4px solid theme.$color-yellow;
+  padding-left: 24px;
 }
 
-.vision {
-  .content > span {
-    background-color: rgba(theme.$color-blue, 0.4);
-  }
-  // div::before {
-  //   @include radial-shadow(theme.$color-blue);
-  //   bottom: -200px;
-  //   right: -300px;
-  // }
-  div::after {
-    @include radial-shadow(theme.$color-blue);
-    bottom: -200px;
-    left: -150px;
-  }
+.values .content > span {
+  background-color: rgba(theme.$color-yellow, 0.25);
+}
+
+.vision div {
+  border-left: 4px solid theme.$color-blue;
+  padding-left: 24px;
+}
+
+.vision .content > span {
+  background-color: rgba(theme.$color-blue, 0.25);
+}
+
+.culture > div {
+  border-top: 3px solid rgba(255, 255, 255, 0.12);
+  padding-top: 20px;
 }
 
 @media (min-width: 996px) {
@@ -136,11 +103,40 @@ div.culture > div img {
   }
 
   div.values {
-    // .values not specific enough
     flex-direction: column;
   }
 
   div.vision {
     flex-direction: row-reverse;
+  }
+
+  .vision div {
+    border-left: none;
+    border-right: 4px solid theme.$color-blue;
+    padding-left: 0;
+    padding-right: 24px;
+    text-align: right;
+  }
+
+  .mission {
+    text-align: right;
+  }
+
+  .mission div {
+    border-left: none;
+    border-right: 4px solid theme.$color-red;
+    padding-left: 0;
+    padding-right: 24px;
+  }
+
+  .values {
+    text-align: center;
+  }
+
+  .values div {
+    border-left: none;
+    border-bottom: 4px solid theme.$color-yellow;
+    padding-left: 0;
+    padding-bottom: 16px;
   }
 }
